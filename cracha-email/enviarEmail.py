@@ -6,7 +6,7 @@ def enviarEmail(reciver_email, nome):
     gmail_user = 'secomp@uem.br'
     gmail_password = '0b7c67f3'
 
-    subject = 'Crachá virtual VI SECOMP @'
+    subject = 'Crachá virtual VI SECOMP'
     content = '''Você se inscreveu para a SECOMP 2022, o melhor evento de tecnologia da cidade!
 
 Agora, prepare-se para embarcar nessa jornada incrível que preparamos para você.

@@ -17,5 +17,5 @@ df['nome'].apply(GerarCracha().gerar)
 # # df['cracha'][0].show()
 
 
-for i in range(df.shape[0]):
-    enviarEmail(df['e-mail'][i], df['nome'][i])
+# for i in range(df.shape[0]):
+#     enviarEmail(df['e-mail'][i], df['nome'][i])
