@@ -1,8 +1,9 @@
 import smtplib
 from email.message import EmailMessage
+from gerarCracha import GerarCracha
 
 
-def enviarEmail(reciver_email, nome):
+def enviarEmail(reciver_email, nome, cpf):
     gmail_user = 'secomp@uem.br'
     gmail_password = '0b7c67f3'
 
@@ -30,6 +31,8 @@ Em caso de dúvida e para se atualizar sobre as novidades da SECOMP, acesse:
     newMessage['From'] = gmail_user
     newMessage['To'] = reciver_email
     newMessage.set_content(content)
+
+    GerarCracha().gerar(nome, cpf)
 
     with open(f'cracha-email/crachasGeradosPDF/cracha{nome}.pdf', 'rb') as f:
         file_data = f.read()

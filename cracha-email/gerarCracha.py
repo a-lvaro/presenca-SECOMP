@@ -5,10 +5,10 @@ from PIL import Image, ImageDraw, ImageFont
 
 
 class GerarCracha():
-    def gerar(self, nome):
+    def gerar(self, nome :str, cpf :str):
         self.cracha = Image.open('cracha-email/cracha recepcao.png')
         self.__setNomeCracha(nome)
-        qrCode = self.__gerarQRcode(nome)
+        qrCode = self.__gerarQRcode(cpf)
         self.__mergeImageQRcode(qrCode)
 
         self.cracha = self.cracha.convert("RGB")
@@ -27,9 +27,9 @@ class GerarCracha():
             255, 255, 255), font=font_type,
             align="center", spacing=32, anchor="mm")
 
-    def __gerarQRcode(self, nome):
+    def __gerarQRcode(self, cpf):
         qr = qrcode.QRCode(border=2)
-        qr.add_data(nome)
+        qr.add_data(cpf)
         return qr.make_image()
 
     def __mergeImageQRcode(self, qrCode):
