@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import os.path
 from pyzbar.pyzbar import decode
 from datetime import datetime, date
 
@@ -45,13 +46,7 @@ class QrCodePresence():
             p.write(cpf + ',' + nome + ',')
             p.write(f'{time.hour}:{time.minute}:{time.second}\n')
 
-        if time.hour >= 18:
-            file = f'presenca/presencaAposIntervalo{date.today()}.csv'
-
-            with open(file, 'a'):
-                pass
-
-        return np.loadtxt(file, delimiter=",", dtype=str, usecols=(0)), file
+        return np.loadtxt(file, delimiter=",", dtype=str, usecols=(0))
 
     def camera(self):
 
@@ -64,18 +59,21 @@ class QrCodePresence():
 
         while True:
 
+            time = datetime.now()
+            if time.hour > 17 and not os.path.exists(f'presenca/presencaAposIntervalo{date.today()}.csv'):
+                presenceList, file = self.__openFile()
+
             _, img = cap.read()
 
             for barcode in decode(img):
-                qrcodeData = barcode.data.decode(
-                    'utf-8').encode('shift-jis').decode('utf-8')
+                qrcodeData = barcode.data.decode('utf-8')
 
                 if qrcodeData in subscribers.keys():        # match CPF
                     qrcodeColor = (0, 255, 0)
 
                     if qrcodeData not in presenceList:
-                        presenceList, file = self.__saveData(file, qrcodeData,
-                                                             subscribers[qrcodeData])
+                        presenceList = self.__saveData(file, qrcodeData,
+                                                       subscribers[qrcodeData])
 
                 else:
                     qrcodeColor = (0, 0, 255)
