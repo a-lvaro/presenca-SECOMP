@@ -5,7 +5,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 
 class GerarCracha():
-    def gerar(self, nome :str, cpf :str):
+    def gerar(self, nome: str, cpf: str):
         self.cracha = Image.open('cracha-email/cracha recepcao.png')
         self.__setNomeCracha(nome)
         qrCode = self.__gerarQRcode(cpf)

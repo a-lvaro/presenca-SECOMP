@@ -29,7 +29,7 @@ class QrCodePresence():
     def __checkSubscribers(self):
         subscribers = {}
 
-        with open('presenca/nomeTeste.txt') as f:
+        with open('presenca/subscribers.txt') as f:
             myDataList = f.read().splitlines()
 
         for data in myDataList:
@@ -49,27 +49,27 @@ class QrCodePresence():
 
     def camera(self):
 
+        presenceList, file = self.__openFile()
+        subscribers = self.__checkSubscribers()
+
         cap = cv2.VideoCapture(0)
-        cap.set(3, 640)
-        cap.set(4, 480)
+        cap.set(3, 940)
+        cap.set(4, 780)
 
         while True:
-            presenceList, file = self.__openFile()
-            subscribers = self.__checkSubscribers()
 
             _, img = cap.read()
 
             for barcode in decode(img):
                 qrcodeData = barcode.data.decode(
                     'utf-8').encode('shift-jis').decode('utf-8')
-                qrcodeColor = (0, 255, 0)
 
                 if qrcodeData in subscribers.keys():        # match CPF
                     qrcodeColor = (0, 255, 0)
 
-                    if qrcodeData not in presenceList:
-                        presenceList, file = self.__saveData(file, qrcodeData,
-                                                             subscribers[qrcodeData])
+                    # if qrcodeData not in presenceList:
+                    #     presenceList, file = self.__saveData(file, qrcodeData,
+                    #                                          subscribers[qrcodeData])
 
                 else:
                     qrcodeColor = (0, 0, 255)
@@ -79,10 +79,10 @@ class QrCodePresence():
                 cv2.polylines(img, [pts], True, qrcodeColor, 5)
                 pts2 = barcode.rect
 
-                if qrcodeColor == (0, 255, 0):
-                    nome = subscribers[qrcodeData]
-                else:
+                if qrcodeColor == (0, 0, 255):
                     nome = 'nao inscrito na SECOMP'
+                else:
+                    nome = subscribers[qrcodeData]
 
                 cv2.putText(img, nome, (pts2[0], pts2[1]), cv2.FONT_HERSHEY_SIMPLEX,
                             0.9, qrcodeColor, 2)
