@@ -38,14 +38,20 @@ class QrCodePresence():
 
         return subscribers
 
-    def __saveData(self, file, qrcodeData, nome):
+    def __saveData(self, file, cpf, nome):
         time = datetime.now()
 
         with open(file, 'a') as p:
-            p.write(qrcodeData + ',' + nome + ',')
+            p.write(cpf + ',' + nome + ',')
             p.write(f'{time.hour}:{time.minute}:{time.second}\n')
 
-        return np.loadtxt(file, delimiter=",", dtype=str, usecols=(0))
+        if time.hour >= 18:
+            file = f'presenca/presencaAposIntervalo{date.today()}.csv'
+
+            with open(file, 'a'):
+                pass
+
+        return np.loadtxt(file, delimiter=",", dtype=str, usecols=(0)), file
 
     def camera(self):
 
@@ -67,9 +73,9 @@ class QrCodePresence():
                 if qrcodeData in subscribers.keys():        # match CPF
                     qrcodeColor = (0, 255, 0)
 
-                    # if qrcodeData not in presenceList:
-                    #     presenceList, file = self.__saveData(file, qrcodeData,
-                    #                                          subscribers[qrcodeData])
+                    if qrcodeData not in presenceList:
+                        presenceList, file = self.__saveData(file, qrcodeData,
+                                                             subscribers[qrcodeData])
 
                 else:
                     qrcodeColor = (0, 0, 255)
