@@ -3,6 +3,8 @@ import numpy as np
 import os.path
 from pyzbar.pyzbar import decode
 from datetime import datetime, date
+from playsound import playsound
+from threading import Thread
 
 
 class QrCodePresence():
@@ -48,7 +50,13 @@ class QrCodePresence():
 
         return np.loadtxt(file, delimiter=",", dtype=str, usecols=(0))
 
+    def __sound(sef, sound):
+        playsound(f'presenca/marioSounds/{sound}.m4a')
+
     def camera(self):
+
+        # não vai tocar pq não tem start
+        sound = Thread(target=self.__sound, args=('marioTheme',))
 
         presenceList, file = self.__openFile()
         subscribers = self.__checkSubscribers()
@@ -66,7 +74,8 @@ class QrCodePresence():
             _, img = cap.read()
 
             for barcode in decode(img):
-                qrcodeData = barcode.data.decode('utf-8')
+                qrcodeData = barcode.data.decode(
+                    'utf-8').encode('shift-jis').decode('utf-8')
 
                 if qrcodeData in subscribers.keys():        # match CPF
                     qrcodeColor = (0, 255, 0)
@@ -75,8 +84,16 @@ class QrCodePresence():
                         presenceList = self.__saveData(file, qrcodeData,
                                                        subscribers[qrcodeData])
 
+                    if sound.is_alive() == False:
+                        sound = Thread(target=self.__sound, args=('coin',))
+                        sound.start()
+
                 else:
                     qrcodeColor = (0, 0, 255)
+
+                    if sound.is_alive() == False:
+                        sound = Thread(target=self.__sound, args=('deth',))
+                        sound.start()
 
                 pts = np.array([barcode.polygon], np.int32)
                 pts = pts.reshape((-1, 1, 2))
