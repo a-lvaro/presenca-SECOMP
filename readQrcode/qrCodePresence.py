@@ -12,27 +12,22 @@ class QrCodePresence():
     def __openFile(self):
         time = datetime.now()
 
-        if time.hour < 18:
-            file = f'presenca/presenca{date.today()}.csv'
+        if time.hour < 12:
+            file = f'readQrcode/presence/workshopLatex{date.today()}.csv'
+        elif time.hour < 15:
+            file = f'readQrcode/presence/mesaredonda{date.today()}.csv'
         else:
-            file = f'presenca/presencaAposIntervalo{date.today()}.csv'
+            file = f'readQrcode/presence/feiradeOportunidades{date.today()}.csv'
 
         with open(file, 'a'):
             pass
 
         return np.loadtxt(file, delimiter=",", dtype=str, usecols=(0)), file
 
-        # if time.hour == 13 and time.day == 4:
-        #     file = f'presenca/presencaWorshopEleflow{date.today()}.csv'
-        # elif time.hour == 13 and time.day == 6:  # aqui vão acontecer dois workshops
-        #     file = f'presenca/presencaWorshopEleflow{date.today()}.csv'
-        # elif time.hour == 13 and time.day == 7:
-        #     file = f'presenca/presencaWorshopFusca{date.today()}.csv'
-
     def __checkSubscribers(self):
         subscribers = {}
 
-        with open('presenca/subscribers.txt') as f:
+        with open('readQrcode/subscribers.txt') as f:
             myDataList = f.read().splitlines()
 
         for data in myDataList:
@@ -51,7 +46,7 @@ class QrCodePresence():
         return np.loadtxt(file, delimiter=",", dtype=str, usecols=(0))
 
     def __sound(sef, sound):
-        playsound(f'presenca/marioSounds/{sound}.m4a')
+        playsound(f'readQrcode/marioSounds/{sound}.mp3')
 
     def camera(self):
 
@@ -68,7 +63,7 @@ class QrCodePresence():
         while True:
 
             time = datetime.now()
-            if time.hour > 17 and not os.path.exists(f'presenca/presencaAposIntervalo{date.today()}.csv'):
+            if time.hour > 17 and not os.path.exists(f'readQrcode/presence/presencaAposIntervalo{date.today()}.csv'):
                 presenceList, file = self.__openFile()
 
             _, img = cap.read()

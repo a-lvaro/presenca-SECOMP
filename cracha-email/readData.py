@@ -3,8 +3,8 @@ import pandas as pd
 
 class ReadData():
 
-    def __saveSubrcribers(self, cpf, nome):
-        with open('presenca/subscribers.txt', 'a') as f:
+    def __saveSubrcribers(self, cpf: str, nome: str):
+        with open('readQrcode/subscribers.txt', 'a') as f:
             data = f'{cpf}|{nome}'
             f.write(data + '\n')
 
