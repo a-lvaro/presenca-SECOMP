@@ -7,4 +7,4 @@ df = ReadData().link(
 
 
 for i in range(df.shape[0]):
-    sendEmail(df['email'][i], df['nome'][i], df['cpf'][i])
+    sendEmail(df['email'][i], df['nome'][i], df['cpf'][i], badge=True)
