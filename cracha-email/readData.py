@@ -12,7 +12,8 @@ class ReadData():
 
         fields = {'Endereço de e-mail': str, 'Nome completo': str, 'CPF': str}
 
-        df = pd.read_csv(link[:-16] + 'export?format=csv', usecols=fields)
+        df = pd.read_csv(link[:-16] + 'export?format=csv',
+                         usecols=fields, dtype=fields)
 
         df.rename(columns={'Endereço de e-mail': 'email',
                   'Nome completo': 'nome', 'CPF': 'cpf'},
