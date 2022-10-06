@@ -3,7 +3,7 @@ from email.message import EmailMessage
 from gerarCracha import GerarCracha
 
 
-def sendEmail(reciver_email, name, cpf):
+def sendEmail(reciver_email, name, cpf, badge=False):
     gmail_user = 'secomp@uem.br'
     gmail_password = '0b7c67f3'
 
@@ -32,14 +32,15 @@ Em caso de dúvida e para se atualizar sobre as novidades da SECOMP, acesse:
     newMessage['To'] = reciver_email
     newMessage.set_content(content)
 
-    GerarCracha().gerar(name, cpf)
+    if badge == True:
+        GerarCracha().gerar(name, cpf)
 
-    with open(f'cracha-email/crachasGeradosPDF/cracha{name}.pdf', 'rb') as f:
-        file_data = f.read()
-        file_name = f'cracha{name}.pdf'
+        with open(f'cracha-email/crachasGeradosPDF/cracha{name}.pdf', 'rb') as f:
+            file_data = f.read()
+            file_name = f'cracha{name}.pdf'
 
-    newMessage.add_attachment(
-        file_data, maintype='application', subtype='octet-stream', filename=file_name)
+        newMessage.add_attachment(
+            file_data, maintype='application', subtype='octet-stream', filename=file_name)
 
     try:
 
