@@ -12,12 +12,14 @@ class QrCodePresence():
     def __openFile(self):
         time = datetime.now()
 
-        if time.hour < 12:
-            file = f'readQrcode/presence/workshopLatex{date.today()}.csv'
-        elif time.hour < 15:
-            file = f'readQrcode/presence/mesaredonda{date.today()}.csv'
-        else:
-            file = f'readQrcode/presence/feiradeOportunidades{date.today()}.csv'
+        # if time.hour < 12:
+        #     file = f'readQrcode/presence/workshopLatex{date.today()}.csv'
+        # elif time.hour < 15:
+        #     file = f'readQrcode/presence/mesaredonda{date.today()}.csv'
+        # else:
+        #     file = f'readQrcode/presence/feiradeOportunidades{date.today()}.csv'
+
+        file = f'readQrcode/presence/workshoEleflow{date.today()}.csv'
 
         with open(file, 'a'):
             pass

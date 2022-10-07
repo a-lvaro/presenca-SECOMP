@@ -8,7 +8,7 @@ class ReadData():
             data = f'{cpf}|{nome}'
             f.write(data + '\n')
 
-    def link(self, link: str):
+    def link(self, link: str, save_subscribers=False):
 
         fields = {'Endereço de e-mail': str, 'Nome completo': str, 'CPF': str}
 
@@ -21,7 +21,8 @@ class ReadData():
 
         df['cpf'] = df['cpf'].str.replace(r'\D', '', regex=True)
 
-        for i in range(df.shape[0]):
-            self.__saveSubrcribers(df['cpf'][i], df['nome'][i])
+        if save_subscribers == True:
+            for i in range(df.shape[0]):
+                self.__saveSubrcribers(df['cpf'][i], df['nome'][i])
 
         return df
