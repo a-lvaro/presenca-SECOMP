@@ -10,10 +10,13 @@ def sendEmail(i, reciver_email, name, cpf, badge=False):
     subject = 'Avaliação da SECOMP'
     content = f'''A SECOMP de 2022, chegou ao fim! 😔
 
-Agradecemos a sua presença, {name}. Esperamos que você tenha gostado desse evento que foi preparado com muita dedicação pela organização ✨, e que as palestras tenham agregado conhecimento para a sua carreira! 
+Agradecemos a sua presença, {name}. Esperamos que você tenha gostado da SECOMP!
 
-Vamos deixar aqui no e-mail um link para o formulário de avaliação do evento. Asim, podemos fazer uma SECOMP melhor ano que vem!
-Link forms: https://forms.gle/Npk3JQMjH3pS7k5y5
+A cada ano visamos a melhoria evento, para que participantes e palestrantes tenham a melhor experiência possível. Dessa forma, gostaríamos de pedir para responder o formulário para que possamos melhorar o evento.
+
+Vamos deixar aqui no e-mail um link para o formulário de avaliação. Asim, podemos fazer uma SECOMP melhor ano que vem!
+
+Link forms: https://forms.gle/SXuvt77iNjdbgCLA7
 
 NOS VEMOS ANO QUE VEM, NA VII SECOMP!🎉
 
@@ -43,7 +46,7 @@ Organização do evento'''
             smtp.login(gmail_user, gmail_password)
             smtp.send_message(newMessage)
 
-            print(f'{i}. e-mail sent to {name}')
+            print(f'{i + 1}. e-mail sent to {name}')
 
     except Exception as ex:
         with open('emailNaoEnviado.csv', 'a') as f:
