@@ -19,6 +19,8 @@ class ReadData():
                   'Nome completo': 'nome', 'CPF': 'cpf'},
                   inplace=True)
 
+        df.dropna(how='all', inplace=True)
+
         df['cpf'] = df['cpf'].str.replace(r'\D', '', regex=True)
 
         if save_subscribers == True:
