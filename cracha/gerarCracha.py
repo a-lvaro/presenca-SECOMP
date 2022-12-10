@@ -6,25 +6,25 @@ from PIL import Image, ImageDraw, ImageFont
 
 class GerarCracha():
     def gerar(self, nome: str, cpf: str):
-        self.cracha = Image.open('cracha-email/cracha recepcao.png')
+        self.cracha = Image.open('cracha/arteCracha/Worshop de Python.png')
         self.__setNomeCracha(nome)
         qrCode = self.__gerarQRcode(cpf)
         self.__mergeImageQRcode(qrCode)
 
         self.cracha = self.cracha.convert("RGB")
-        self.cracha.save(f"cracha-email/crachasGeradosPDF/cracha{nome}.pdf")
+        self.cracha.save(f"cracha/crachasGeradosPDF/cracha{nome}.pdf")
 
     def __setNomeCracha(self, nome: str):
         # font_type = ImageFont.truetype('Arial.ttf', 98)
         font_type = ImageFont.truetype(
-            "cracha-email/keep_calm/KeepCalm-Medium.ttf", 110, encoding="unic")
+            "cracha/fonte/keep_calm/KeepCalm-Medium.ttf", 70, encoding="unic")
 
         # sanitize o nome Deixando-o Na Forma de Título
         nome = nome.strip().title().replace(" De ", " de ")
 
         draw = ImageDraw.Draw(self.cracha)
-        draw.text(xy=(781, 980), text=self.__wrapText(nome, font_type, 1320), fill=(
-            255, 255, 255), font=font_type,
+        draw.text(xy=(681, 900), text=self.__wrapText(nome, font_type, 1320), fill=(
+            0, 0, 0), font=font_type,
             align="center", spacing=32, anchor="mm")
 
     def __gerarQRcode(self, cpf):
@@ -34,7 +34,7 @@ class GerarCracha():
 
     def __mergeImageQRcode(self, qrCode):
         qrCode = qrCode.resize((505, 505))
-        self.cracha.paste(qrCode, (526, 1242), mask=qrCode)
+        self.cracha.paste(qrCode, (453, 1047), mask=qrCode)
 
     def __wrapText(self, text, font, maxwidth):
         lines = []
