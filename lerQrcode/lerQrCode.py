@@ -17,11 +17,12 @@ class LerQrCode():
     def __getFile(self, path: str):
         data = datetime.today().strftime('%Y-%m-%d')
         path = f'{path}/presenca.csv'
+        fields = {'data': str, 'hora': str, 'cpf': str, 'nome': str}
 
         if not os.path.exists(path):
             self.__setFile(path)
 
-        df = pd.read_csv(path)
+        df = pd.read_csv(path, usecols=fields, dtype=fields)
         df['cpf'] = df['cpf'].astype(str)
 
         return df[df['data'] == data][['hora', 'nome', 'cpf']]
@@ -42,12 +43,12 @@ class LerQrCode():
 
         data = datetime.today().strftime('%Y-%m-%d')
         hora = datetime.today().strftime('%H-%M-%S')
+        fields = {'data': str, 'hora': str, 'cpf': str, 'nome': str}
 
         with open(f'{path}/presenca.csv', 'a') as p:
             p.write(data + ',' + hora + ',' + cpf + ',' + nome + '\n')
 
-        df = pd.read_csv(f'{path}/presenca.csv')
-        df['cpf'] = df['cpf'].astype(str)
+        df = pd.read_csv(f'{path}/presenca.csv', usecols=fields, dtype=fields)
 
         return df[df['data'] == data][['hora', 'nome', 'cpf']]
 
