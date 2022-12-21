@@ -47,7 +47,7 @@ class Certificado:
         self.__df = self.__df[ordem_colunas]
         self.__df.rename(columns={'carga horaria': 'CARGA HORARIA', 'nota': 'NOTA OBTIDA', 'frequencia': 'FREQUÊNCIA',
                          'codigos': 'PARTICIPOU NO TEMA ?* (NOME TEMA TAL QUAL NO SISTEMA - SE HOUVER MAIS DE UM POR GENTIZLEZA SEPARE POR PONTO E VIRGULA)'}, inplace=True)
-        self.__df.index.names = ['NOME', 'CPF']
+        self.__df.index.names = ['NOME PARTICIPANTE', 'NUMERO CPF']
 
     def __salvar(self, nome_evento: str):
         path = f'InscritosPresentes/{nome_evento}/{nome_evento} PlanilhaDeBeneficiario.xlsx'
