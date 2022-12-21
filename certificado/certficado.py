@@ -18,7 +18,7 @@ class Certificado:
 
     def __setCodigoDias(self, codigos: list):
         for data, codigo in zip(self.__datas, codigos):
-            self.__df.loc[self.__df['data'] == data, [data]] = codigo
+            self.__df.loc[self.__df['data'] == data, [data]] = f'{codigo};'
 
         # junta os cpfs iguais em apenas uma linha e coloca as presenças de todos os dias
         self.__df = self.__df.groupby(['nome', 'cpf'])[self.__datas].sum()
@@ -28,8 +28,10 @@ class Certificado:
 
         carga_horaria_total = len(self.__datas) * carga_horaria_aula
 
-        self.__df['carga horaria'] = (self.__df[self.__datas].count(axis=1) * carga_horaria_aula)
-        self.__df['frequencia'] = ((self.__df['carga horaria'] / carga_horaria_total) * 100).round().astype('int')
+        self.__df['carga horaria'] = (
+            self.__df[self.__datas].count(axis=1) * carga_horaria_aula)
+        self.__df['frequencia'] = (
+            (self.__df['carga horaria'] / carga_horaria_total) * 100).round().astype('int')
 
     def __notaObtida(self) -> None:
         self.__df['nota'] = NaN
@@ -39,7 +41,7 @@ class Certificado:
 
         self.__df[self.__datas] = self.__df[self.__datas].replace(NaN, '')
         self.__df['codigos'] = self.__df[self.__datas].apply("".join, axis=1)
-        self.__df['codigos'].str[:-1]
+        self.__df['codigos'] = self.__df['codigos'].str[:-1]
 
         self.__df = self.__df.drop(self.__datas, axis='columns')
         self.__df = self.__df[ordem_colunas]
@@ -57,4 +59,4 @@ class Certificado:
 
 
 Certificado(nome_evento='workshopPython2022', codigos=[
-            '29172:', '29173'], carga_horaria_aula=4)
+            '29172', '29173'], carga_horaria_aula=4)
