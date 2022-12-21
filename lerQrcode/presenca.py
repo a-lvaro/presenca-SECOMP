@@ -12,15 +12,15 @@ class Presenca():
 
         self.__fields = {'data': str, 'hora': str, 'cpf': str, 'nome': str}
 
-    def __setFile(self, path: str) -> None:
+    def __createFile(self, path: str) -> None:
         with open(path, 'w') as f:
             f.write('data,hora,cpf,nome\n')
 
     def getFile(self) -> pd.DataFrame:
         path = f'{self.__path}/presenca.csv'
-        
+
         if not os.path.exists(path):
-            self.__setFile(path)
+            self.__createFile(path)
 
         df = pd.read_csv(path, usecols=self.__fields, dtype=self.__fields)
         df['cpf'] = df['cpf'].astype(str)
