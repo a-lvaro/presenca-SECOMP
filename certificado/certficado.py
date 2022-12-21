@@ -11,7 +11,7 @@ class Certificado:
         self.__datas = self.__df['data'].drop_duplicates().tolist()
 
         self.__setCodigoDias(codigos)
-        self.__cargaHorariaFrequencia(self.__datas, carga_horaria_aula)
+        self.__cargaHorariaFrequencia(carga_horaria_aula)
         self.__notaObtida()
         self.__formatar()
         self.__salvar(nome_evento)
@@ -26,18 +26,16 @@ class Certificado:
     def __cargaHorariaFrequencia(self, carga_horaria_aula) -> None:
         self.__df = self.__df[self.__datas].replace(0, NaN)
 
-        carga_horaria_total = len(self.__datas) + carga_horaria_aula
+        carga_horaria_total = len(self.__datas) * carga_horaria_aula
 
-        self.__df['carga horaria'] = (
-            self.__df[self.__datas].count(axis=1) * carga_horaria_aula)
-        self.__df['frequencia'] = (
-            (self.__df['carga horaria'] / carga_horaria_total) * 100).round().astype('int')
+        self.__df['carga horaria'] = (self.__df[self.__datas].count(axis=1) * carga_horaria_aula)
+        self.__df['frequencia'] = ((self.__df['carga horaria'] / carga_horaria_total) * 100).round().astype('int')
 
     def __notaObtida(self) -> None:
         self.__df['nota'] = NaN
 
     def __formatar(self):
-        ordem_colunas = ['carga horaria', 'nota', 'frequencia', 'codigo']
+        ordem_colunas = ['carga horaria', 'nota', 'frequencia', 'codigos']
 
         self.__df[self.__datas] = self.__df[self.__datas].replace(NaN, '')
         self.__df['codigos'] = self.__df[self.__datas].apply("".join, axis=1)
@@ -45,13 +43,18 @@ class Certificado:
 
         self.__df = self.__df.drop(self.__datas, axis='columns')
         self.__df = self.__df[ordem_colunas]
+        self.__df.rename(columns={'carga horaria': 'CARGA HORARIA', 'nota': 'NOTA OBTIDA', 'frequencia': 'FREQUÊNCIA',
+                         'codigos': 'PARTICIPOU NO TEMA ?* (NOME TEMA TAL QUAL NO SISTEMA - SE HOUVER MAIS DE UM POR GENTIZLEZA SEPARE POR PONTO E VIRGULA)'}, inplace=True)
+        self.__df.index.names = ['NOME', 'CPF']
 
     def __salvar(self, nome_evento: str):
-        path = f'InscritosPresentes/{nome_evento}/{nome_evento} PlanilhaDeBeneficiario.csv'
-        with open(path, 'w') as f:
-            f.write(
-                'NOME PARTICIPANTE,NUMERO CPF,CARGA HORARIA,NOTA OBTIDA,FEQUÊNCIA,PARTICIPOU NO TEMA ?* (NOME TEMA TAL QUAL NO SISTEMA - SE HOUVER MAIS DE UM POR GENTIZLEZA SEPARE POR PONTO E VIRGULA)\n')
+        path = f'InscritosPresentes/{nome_evento}/{nome_evento} PlanilhaDeBeneficiario.xlsx'
+        self.__df.to_excel(path)
+
+        print('\n\n' + '-' * 100 + '\n')
+        print(f'certicifados na pasta {path}')
+        print('\n' + '-' * 100)
 
 
 Certificado(nome_evento='workshopPython2022', codigos=[
-                   '29172:', '29173'], carga_horaraia_total=4)
+            '29172:', '29173'], carga_horaria_aula=4)
