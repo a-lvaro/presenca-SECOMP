@@ -13,6 +13,9 @@ class LerQrCode():
         self.__mario = SomMario()
         self.__presenca = Presenca(path)
 
+        self.__data = lambda: datetime.today().strftime('%Y-%m-%d')
+        self.__horario = lambda: datetime.today().strftime('%H-%M-%S')
+
     def __inicializarCamera(self):
         cap = cv2.VideoCapture(0)
         cap.set(3, 940)
