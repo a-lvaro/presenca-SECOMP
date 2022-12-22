@@ -5,8 +5,8 @@ from PIL import Image, ImageDraw, ImageFont
 
 
 class GerarCracha():
-    def gerar(self, nome: str, cpf: str):
-        self.cracha = Image.open('cracha/arteCracha/Worshop de Python.png')
+    def gerar(self, nome: str, cpf: str, nome_evento: str):
+        self.cracha = Image.open(f'cracha/arteCracha/{nome_evento}.png')
         self.__setNomeCracha(nome)
         qrCode = self.__gerarQRcode(cpf)
         self.__mergeImageQRcode(qrCode)

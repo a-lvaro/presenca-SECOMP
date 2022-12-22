@@ -4,9 +4,9 @@ from cracha.gerarCracha import GerarCracha
 
 
 class EnviarEmail():
-    def enviar(self, contador: int, reciver_email: str, nome: str, cpf: str, cracha=False, path_arquivo_anexo=None):
+    def enviar(self, contador: int, reciver_email: str, nome: str, cpf: str, cracha=False, path_arquivo_anexo=None, nome_evento=None):
         self.__gmail_user = 'pet@din.uem.br'
-        self.__gmail_password = 'okKDiNXq3Per4m'
+        self.__gmail_password = 'd7zsSi7m7xM6k'
         self.__newMessage = EmailMessage()
 
         subject, content = self.__corpoEmail(nome)
@@ -17,10 +17,11 @@ class EnviarEmail():
         self.__newMessage.set_content(content)
 
         # se o anexo vir antes irá ocorrer erro
-        self.__anexo(nome=nome, cpf=cpf, cracha=cracha,
-                     path_arquivo=path_arquivo_anexo)
+        self.__anexoCracha(nome=nome, cpf=cpf, cracha=cracha,
+                           path_arquivo=path_arquivo_anexo,
+                           nome_evento=nome_evento)
 
-        self.__enviarEmail(contador, reciver_email, nome)
+        self.__enviarEmail(contador, reciver_email, nome, nome_evento)
 
     def __corpoEmail(self, nome: str) -> str and str:
         subject = 'Workshop Python PET-Informática'
@@ -43,10 +44,10 @@ PET-Informática
 '''
         return subject, content
 
-    def __anexo(self, nome, cpf, cracha, path_arquivo) -> None:
+    def __anexoCracha(self, nome: str, cpf: str, cracha: bool, path_arquivo: str, nome_evento: str) -> None:
 
         if cracha == True:
-            GerarCracha().gerar(nome, cpf)
+            GerarCracha().gerar(nome, cpf, nome_evento)
 
             with open(f'cracha/crachasGeradosPDF/cracha{nome}.pdf', 'rb') as f:
                 file_data = f.read()
@@ -63,7 +64,7 @@ PET-Informática
             self.__newMessage.add_attachment(
                 file_data, maintype='application', subtype='octet-stream', filename=file_name)
 
-    def __enviarEmail(self, contador: int, reciver_email: str, nome: str) -> None:
+    def __enviarEmail(self, contador: int, reciver_email: str, nome: str, nome_evento :str) -> None:
         try:
             with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
                 smtp.login(self.__gmail_user, self.__gmail_password)
@@ -72,7 +73,7 @@ PET-Informática
                 print(f'{contador + 1}. e-mail sent to {nome}')
 
         except Exception as ex:
-            with open('emailNaoEnviado.csv', 'a') as f:
+            with open(f'InscritosPresentes/{nome_evento}/emailNaoEnviado.csv', 'a') as f:
                 f.write(reciver_email + ',' + nome + '\n')
 
             print(f'{contador + 1}. Something went wrong…. {ex} {nome}')

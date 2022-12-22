@@ -1,20 +1,29 @@
 # se o nome da pasta for 'email' o python vai importar uma biblioteca própria
-from emaill.enviarEmail import EnviarEmail
-from emaill.readData import ReadData
-from cracha.gerarCracha import GerarCracha
+from emaill.mainEmail import MainEmail
 
-# salva inscritos na pasta InscritosPresentes
-df = ReadData().link(
-    'https://docs.google.com/spreadsheets/d/1IQq62C_GPqEou536OyfRQXyB9KpVyMLsUKbXrYVYmA8/edit?usp=sharing',
-    nome_evento='workshopPython2022',
-    registrar_inscricao=True)
+flag = True
+while flag:
+    print('\n\n' + '*' * 100)
+    print('\n1. Criar novo evento / enviar email')
+    print('2. Ler as presenças por meio do QrCode')
+    print('3. Fazer arquivo dos certificados')
+    print('4. Sair')
 
-print(df)
-print('\n\n')
+    opcao = input('\nOpção: ')
 
-# enviar emails
-email = EnviarEmail()
-for i in range(df.shape[0]):
-    email.enviar(i, df['email'][i], df['nome'][i], df['cpf'][i],
-                 cracha=True,
-                 path_arquivo_anexo=None)
+    print('*' * 100)
+
+    if opcao == '1':
+        MainEmail()
+
+    elif opcao == '2':
+        pass
+
+    elif opcao == '3':
+        pass
+
+    elif opcao == '4':
+        flag = False
+
+    else:
+        print('\n\nOpção não encontrada')
