@@ -1,4 +1,3 @@
-import pandas as pd
 from emaill.readData import ReadData
 from emaill.enviarEmail import EnviarEmail
 
@@ -51,13 +50,14 @@ class MainEmail():
         if path_arquivo_anexo == '':
             path_arquivo_anexo = None
 
-        print('\n\nEnviando e-mails')
-        # enviar emails
-        email = EnviarEmail()
+        print('\n\n\033[32mEnviando e-mails\033[m')
+        email = EnviarEmail(gmail_user=input('\n\te-mail: '),
+                            senha=input('\tsenha: '),
+                            cracha=True,
+                            path_arquivo_anexo=path_arquivo_anexo,
+                            nome_evento=nome_evento)
+
         for i in range(df.shape[0]):
-            email.enviar(i, df['email'][i], df['nome'][i], df['cpf'][i],
-                         cracha=True,
-                         path_arquivo_anexo=path_arquivo_anexo,
-                         nome_evento=nome_evento)
+            email.enviar(i, df['email'][i], df['nome'][i], df['cpf'][i])
 
         print('\n' + '+' * 30)
