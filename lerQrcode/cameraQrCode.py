@@ -2,11 +2,11 @@ import cv2
 import numpy as np
 from pyzbar.pyzbar import decode
 from datetime import datetime
-from somMario import SomMario
-from presenca import Presenca
+from lerQrcode.somMario import SomMario
+from lerQrcode.presenca import Presenca
 
 
-class LerQrCode():
+class CameraQrCode():
     def __init__(self, nome_evento: str):
         path = f'InscritosPresentes/{nome_evento}'
 
@@ -32,7 +32,7 @@ class LerQrCode():
         cv2.putText(img, nome, (pts2[0], pts2[1]), cv2.FONT_HERSHEY_SIMPLEX,
                     0.9, qrcodeColor, 2)
 
-    def camera(self) -> None:
+    def inicializar(self) -> None:
         df_presenca = self.__presenca.getFile()
         inscritos = self.__presenca.checarInscricao()
 
@@ -77,5 +77,5 @@ class LerQrCode():
             cv2.waitKey(1)
 
 
-camera = LerQrCode('workshopPython2022')
-camera.camera()
+# camera = LerQrCode('workshopPython2022')
+# camera.camera()

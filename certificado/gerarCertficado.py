@@ -58,5 +58,5 @@ class Certificado:
         print('\n' + '-' * 100)
 
 
-Certificado(nome_evento='workshopPython2022', codigos=[
-            '29172', '29173'], carga_horaria_aula=4)
+# Certificado(nome_evento='workshopPython2022', codigos=[
+#             '29172', '29173'], carga_horaria_aula=4)
