@@ -1,6 +1,7 @@
 # se o nome da pasta for 'email' o python vai importar uma biblioteca própria
 from emaill.mainEmail import MainEmail
-from lerQrcode.mainQrCode import menu
+from lerQrcode.mainQrCode import menuCamera
+from certificado.maincertificado import menuCertificado
 
 flag = True
 while flag:
@@ -18,10 +19,10 @@ while flag:
         MainEmail()
 
     elif opcao == '2':
-        menu()
+        menuCamera()
 
     elif opcao == '3':
-        pass
+        menuCertificado()
 
     elif opcao == '4':
         flag = False
