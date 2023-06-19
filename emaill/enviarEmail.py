@@ -1,4 +1,4 @@
-import smtplib
+import smtplib, ssl
 from email.message import EmailMessage
 from cracha.gerarCracha import GerarCracha
 
@@ -32,23 +32,21 @@ class EnviarEmail():
         self.__enviarEmail(contador, reciver_email, nome)
 
     def __corpoEmail(self, nome: str) -> str and str:
-        subject = 'Workshop Python PET-Informática'
-        content = f'''Olá {nome}!
+        subject = f'Prezado {nome} do Curso de Ciência da Computação ou Informática,'
+        content = f'''Gostaríamos de te parabenizar pela aprovação no vestibular da UEM e pelo ingresso nos cursos de Ciência da Computação/Informática! Sejam muito bem vindos(as) à UEM!
 
-Muito obrigado pela sua inscrição no Workshop de Python do PET-Informática! Só relembrando, teremos aulas nos dias 10/12 (amanhã!) e 17/12, sempre das 8:30 às 11:30, no bloco C56.
+O PET-Informática, o Centro Acadêmico de Ciência da Computação (CACCOM), o Centro Acadêmico de  Informática (CAINFO), o grupo Conectadas e os professores do Departamento de Informática (DIN) estão organizando a Semana de Recepção aos Calouros, na qual ocorrerão palestras, apresentações e integrações!
 
-Neste e-mail, enviamos em anexo seu crachá virtual. É pelo QR Code do seu crachá que a presença será contabilizada. Você precisará escanear seu QR code ao chegar na aula e ao sair dela, então faça download dele no seu celular. Toleramos atrasos de 30 minutos no máximo, mais do que isso não será contabilizada presença.
+O evento será realizado no DIN (bloco C-56), nos dias 28/06, 29/06 e 30/06, nos horários listados na imagem abaixo. Nesses dias as aulas estarão dispensadas.
 
-Para quem ainda não entrou no Google Classroom, peço que entrem na seguinte sala com o seu e-mail pessoal. É por esta sala que disponibilizaremos os materiais e listas de exercícios para serem feitas em casa. Após cada aula, vamos liberar exercícios que representarão 1/4 da carga horária do Workshop, ou seja, 1 hora cada lista de exercícios, totalizando 3 horas. As listas deverão ser  entregues para receber a carga horária total do Workshop.
-Classroom: https://classroom.google.com/c/NTQwMDk3MTk2MjUz?cjc=4gzse6x
+Pedimos para que compareçam e participem das atividades. É um evento muito importante para que vocês se situem no ambiente universitário da UEM e conheçam seus colegas.
 
-Por fim, para os que irão utilizar o computador próprio e ainda não possuem o Python 3 instalado, pedimos que já venham com ele instalado em sua máquina(https://www.python.org/downloads/). Podem utilizar qualquer IDE para programar, mas recomendamos o VSCode (https://code.visualstudio.com/download) ou o PyCharm (https://www.jetbrains.com/pycharm/download/#section=windows).
+Acessem o site da recepção dos calouros para mais informações.
 
-Mais uma vez, obrigado por sua inscrição e nos vemos nas aulas!
+http://din.uem.br/recepcaocalouros/
 
-Att,
-PET-Informática
-
+Abraços,
+Equipe do DIN.
 '''
         return subject, content
 

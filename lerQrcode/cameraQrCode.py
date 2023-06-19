@@ -53,11 +53,11 @@ class CameraQrCode():
                     nome = inscritos[qrCodeCPF]
                     self.__mario.tocar('inscrito')
 
-                    if qrCodeCPF not in df_presenca['cpf'].tolist():
+                    if qrCodeCPF not in df_presenca['cpf'].tolist(): # salva a presença caso não tenha recebido presença
                         df_presenca = self.__presenca.salvarDados(
                             qrCodeCPF, inscritos[qrCodeCPF])
 
-                    else:
+                    else:               # se já tiver na lista de presença, mas a hora for diferente, irá salvar novamenete a presença
                         horas = df_presenca[df_presenca['cpf']
                                             == qrCodeCPF]['hora'].tolist()
 

@@ -4,14 +4,15 @@ from os.path import exists
 # aqui precisa de ^C para sair do programa
 # precisa ser melhorado
 
+def path(nomeEvento): 
+    return f'InscritosPresentes/{nomeEvento}'
 
 def menuCamera():
     print('\n\n\n' + '/\/' * 40)
 
-    nomeEvento = ''
+    nomeEvento = '??'
 
-    def path(
-        nomeEvento): return f'InscritosPresentes/{nomeEvento}/presenca.csv'
+    
 
     while not exists(path(nomeEvento)):
         nomeEvento = input('\n\n\tNome do evento: ')
