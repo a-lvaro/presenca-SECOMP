@@ -32,14 +32,16 @@ class EnviarEmail():
         self.__enviarEmail(contador, reciver_email, nome)
 
     def __corpoEmail(self, nome: str) -> str and str:
-        subject = f'Prezado {nome} do Curso de Ciência da Computação ou Informática,'
-        content = f'''Gostaríamos de te parabenizar pela aprovação no vestibular da UEM e pelo ingresso nos cursos de Ciência da Computação/Informática! Sejam muito bem vindos(as) à UEM!
+        subject = f'Olá, {nome} - Curso de Informática,'
+        content = f'''Gostaríamos de te parabenizar pela aprovação no vestibular da UEM e pelo ingresso no curso de Informática! Seja muito bem vindo(a) à UEM!
 
 O PET-Informática, o Centro Acadêmico de Ciência da Computação (CACCOM), o Centro Acadêmico de  Informática (CAINFO), o grupo Conectadas e os professores do Departamento de Informática (DIN) estão organizando a Semana de Recepção aos Calouros, na qual ocorrerão palestras, apresentações e integrações!
 
 O evento será realizado no DIN (bloco C-56), nos dias 28/06, 29/06 e 30/06, nos horários listados na imagem abaixo. Nesses dias as aulas estarão dispensadas.
 
-Pedimos para que compareçam e participem das atividades. É um evento muito importante para que vocês se situem no ambiente universitário da UEM e conheçam seus colegas.
+Esse evento é muito importante para que você se situe no ambiente universitário da UEM e conheça seus colegas.
+
+Em anexo, existe um arquivo com o cronograma do evento e um arquivo com um qrCode. Esse qrCode é o seu crachá, você irá utilizá-lo para marcar a sua presença nos dias da recepção. 
 
 Acessem o site da recepção dos calouros para mais informações.
 
