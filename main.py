@@ -12,6 +12,8 @@ while flag:
     print('4. Sair')
 
     opcao = input('\nOpção: ')
+    # 0qvdd0Lw1JKF3lnRw6QU
+    # pet@din.uem.br
 
     print('*' * 100)
 

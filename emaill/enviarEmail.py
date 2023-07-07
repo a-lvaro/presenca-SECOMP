@@ -32,23 +32,23 @@ class EnviarEmail():
         self.__enviarEmail(contador, reciver_email, nome)
 
     def __corpoEmail(self, nome: str) -> str and str:
-        subject = f'Olá, {nome} - Curso de Informática,'
-        content = f'''Gostaríamos de te parabenizar pela aprovação no vestibular da UEM e pelo ingresso no curso de Informática! Seja muito bem vindo(a) à UEM!
+        subject = f'ERRATA - Capacitação Python 2023'
+        content = f'''Olá, {nome}!
 
-O PET-Informática, o Centro Acadêmico de Ciência da Computação (CACCOM), o Centro Acadêmico de  Informática (CAINFO), o grupo Conectadas e os professores do Departamento de Informática (DIN) estão organizando a Semana de Recepção aos Calouros, na qual ocorrerão palestras, apresentações e integrações!
+Atualizamos o seu QR Code. Favor desconsiderar o anterior e utilizar o que consta neste e-mail. 
 
-O evento será realizado no DIN (bloco C-56), nos dias 28/06, 29/06 e 30/06, nos horários listados na imagem abaixo. Nesses dias as aulas estarão dispensadas.
+Muito obrigado pela sua inscrição na capacitação de Python do PET-Informática! Só relembrando, teremos aulas nos dias 08/07 (amanhã!) e 15, 22 e 29 de julho, sempre das 8:30 às 11:30, no bloco C56.
 
-Esse evento é muito importante para que você se situe no ambiente universitário da UEM e conheça seus colegas.
+Neste e-mail, enviamos em anexo seu crachá virtual. É pelo QR Code do seu crachá que a presença será contabilizada. Você precisará escanear seu qrCcode ao chegar na aula e ao sair dela, então faça download dele no seu celular. Toleramos atrasos de 30 minutos no máximo, mais do que isso não será contabilizada presença.
 
-Em anexo, existe um arquivo com o cronograma do evento e um arquivo com um qrCode. Esse qrCode é o seu crachá, você irá utilizá-lo para marcar a sua presença nos dias da recepção. 
+Para quem ainda não entrou no Google Classroom, peço que entrem na seguinte sala com o seu e-mail pessoal. 
+Classroom: https://classroom.google.com/c/NjE1MzQ2NDkyNDE5?cjc=z2qecty
+Por fim, para os que irão utilizar o computador próprio e ainda não possuem o Python 3 instalado, pedimos que já venham com ele instalado em sua máquina(https://www.python.org/downloads/). Podem utilizar qualquer IDE para programar, mas recomendamos o VSCode (https://code.visualstudio.com/download) ou o PyCharm (https://www.jetbrains.com/pycharm/download/#section=windows).
 
-Acessem o site da recepção dos calouros para mais informações.
+Mais uma vez, obrigado por sua inscrição e nos vemos nas aulas!
 
-http://din.uem.br/recepcaocalouros/
-
-Abraços,
-Equipe do DIN.
+Att,
+PET-Informática
 '''
         return subject, content
 
