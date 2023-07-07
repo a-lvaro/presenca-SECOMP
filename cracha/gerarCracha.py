@@ -17,7 +17,7 @@ class GerarCracha():
     def __setNomeCracha(self, nome: str):
         # font_type = ImageFont.truetype('Arial.ttf', 98)
         font_type = ImageFont.truetype(
-            "cracha/fonte/vt323/VT323-Regular.ttf", 90, encoding="unic")
+            "cracha/fonte/fs-gravity/fs-gravity.ttf", 90, encoding="unic")
 
         # sanitize o nome Deixando-o Na Forma de Título
         nome = nome.strip().title().replace(" De ", " de ")
